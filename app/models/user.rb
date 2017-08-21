@@ -24,10 +24,12 @@ class User < ApplicationRecord
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
-    return false unless remember_digest
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
 
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    return false unless digest
+
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # Returns the hash digest of the given string.
