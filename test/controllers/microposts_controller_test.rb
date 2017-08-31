@@ -20,4 +20,17 @@ class MicropostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to login_url
   end
+
+  test "should redirect destroy for wrong micropost" do
+    lana = users(:lana)
+    post = microposts(:ants)
+
+    log_in_as lana
+
+    assert_no_difference "Micropost.count" do
+      delete micropost_path(post)
+    end
+
+    assert_redirected_to root_url
+  end
 end
