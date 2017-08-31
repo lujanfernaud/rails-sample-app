@@ -7,7 +7,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     @user = users(:dummy)
   end
 
-  test "" do
+  test "user profile" do
     get user_path(@user)
     assert_template "users/show"
 
